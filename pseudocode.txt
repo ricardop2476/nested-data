@@ -1,1 +1,9 @@
 https://data.cityofnewyork.us/Business/Times-Square-Food-Beverage-Locations/kh2m-kcyz
+https://data.cityofnewyork.us/Recreation/Directory-Of-Toilets-In-Public-Parks/hjae-yuav
+
+ask questions, location, reasons, handicap accessibility, time of incident
+location : place(bronx, brooklyn, queens)
+handicap(yes)
+time(after 12pm = choose open 24hrs )
+if its before , puts all the options near the location. 
+maybe ask what kind of public space they would prefer, playground, etc ... 
