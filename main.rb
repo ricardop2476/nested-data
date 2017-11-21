@@ -1,5 +1,5 @@
 require 'json'
-violation_data = JSON.parse(%q|
+directory_data = JSON.parse(%q|
 {
    "meta":{
       "view":{
@@ -10322,3 +10322,4 @@ violation_data = JSON.parse(%q|
    ]
 }
 |)
+
