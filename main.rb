@@ -10329,4 +10329,11 @@ directory_data["data"].each do |locations|
    if locations[12].include?(user_borough)
       puts locations[9]
    end
+  puts "Do you want handicap accessible locations?"
+  user_handicap = gets.chomp
+  directory_data["data"].each do |handicap|
+   if handicap[11] == user_handicap
+     puts handicap[9]
+   end
+  end
 end
