@@ -10323,3 +10323,10 @@ directory_data = JSON.parse(%q|
 }
 |)
 
+puts "What borough are you in?"
+user_borough = gets.chomp
+directory_data["data"].each do |locations|
+   if locations[12].include?(user_borough)
+      puts locations[9]
+   end
+end
