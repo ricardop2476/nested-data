@@ -10329,8 +10329,16 @@ user_borough = gets.chomp.capitalize
 puts "Do you want handicap accessible locations?"
 user_handicap = gets.chomp.capitalize
 
-directory_data["data"].each do |location|
-  if location[12].include?(user_borough) && location[11].include?(user_handicap)
-    puts location[9]
+if user_handicap == "No"
+  directory_data["data"].each do |location|
+    if location[12].include?(user_borough)
+      puts location[9]
+    end
+  end
+else
+  directory_data["data"].each do |location|
+    if location[12].include?(user_borough) && location[11].include?(user_handicap)
+      puts location[9]
+    end
   end
 end
