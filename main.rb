@@ -10323,22 +10323,53 @@ directory_data = JSON.parse(%q|
 }
 |)
 
-puts "What borough are you in?"
-user_borough = gets.chomp.capitalize
+# puts "What borough are you in?"
+# user_borough = gets.chomp.capitalize
 
-puts "Do you want handicap accessible locations?"
-user_handicap = gets.chomp.capitalize
+# puts "Do you want handicap accessible locations?"
+# user_handicap = gets.chomp.capitalize
 
-if user_handicap == "No"
-  directory_data["data"].each do |location|
-    if location[12].include?(user_borough)
-      puts location[9]
+# if user_handicap == "No"
+#   directory_data["data"].each do |location|
+#     if location[12].include?(user_borough)
+#       puts location[9]
+#     end
+#   end
+# else
+#   directory_data["data"].each do |location|
+#     if location[12].include?(user_borough) && location[11].include?(user_handicap)
+#       puts location[9]
+#     end
+#   end
+# end
+
+def user_data_to_info(facilities, borough, accessibility)
+  if accessibility == "No"
+    facilities["data"].each do |facility|
+      if facility[12].include?(borough)
+        return {facility_name: facility[8], facility_address: facility[9]}
+      end
     end
-  end
-else
-  directory_data["data"].each do |location|
-    if location[12].include?(user_borough) && location[11].include?(user_handicap)
-      puts location[9]
+  else
+    facilities["data"].each do |facility|
+      if facility[12].include?(borough) && facility[11].include?(accessibility)
+        return {facility_name: facility[8], facility_address: facility[9]}
+      end
     end
   end
 end
+
+# puts user_data_to_info(directory_data,"Brooklyn","Yes")
+
+def run(facilities)
+  puts "What borough are you in?"
+  user_borough = gets.chomp.capitalize
+  puts "Do you want handicap accessible locations?"
+  user_handicap = gets.chomp.capitalize
+  
+  user_info = user_data_to_info(facilities, user_borough, user_handicap)
+  puts user_info[:facility_name]
+  puts user_info[:facility_address]
+end
+  
+run(directory_data)
