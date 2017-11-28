@@ -10344,14 +10344,13 @@ directory_data = JSON.parse(%q|
 # end
 
 def user_data_to_info(facilities, borough, accessibility)
-  places = []
+  user_facilities = []
   if accessibility == "No"
     facilities["data"].each do |facility|
       if facility[12].include?(borough)
        facility_name = facility[8]
-        facility_address = facility[9]
-        places << facility_name
-         places <<  facility_address
+       facility_address = facility[9]
+       user_facilities << facility_name << facility_address
       end
     end
   else
@@ -10359,14 +10358,11 @@ def user_data_to_info(facilities, borough, accessibility)
       if facility[12].include?(borough) && facility[11].include?(accessibility)
         facility_name = facility[8]
         facility_address = facility[9]
-        places << facility_name
-        places <<  facility_address
+        user_facilities << facility_name << facility_address
       end
     end
   end
-  places.each do |place|
-    puts place
-  end
+  return user_facilities
 end
 
 # puts user_data_to_info(directory_data,"Brooklyn","Yes")
@@ -10378,8 +10374,9 @@ def run(facilities)
   user_handicap = gets.chomp.capitalize
   
   user_info = user_data_to_info(facilities, user_borough, user_handicap)
- # puts user_info[:facility_name]
- # puts user_info[:facility_address]
+  user_info.each do |name_and_address|
+    puts name_and_address
+  end
 end
 run(directory_data)
   
