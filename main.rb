@@ -10343,37 +10343,53 @@ directory_data = JSON.parse(%q|
 #   end
 # end
 
+# method that takes in the dataset, borough and accessibility choice
 def user_data_to_info(facilities, borough, accessibility)
+  # this array stores the names and addresses of facilities determined by the user
   user_facilities = []
+  # if the user does not need handicap accessible locations
   if accessibility == "No"
     facilities["data"].each do |facility|
+      # check if the facility has the same borough as the user
       if facility[12].include?(borough)
-       facility_name = facility[8]
-       facility_address = facility[9]
-       user_facilities << facility_name << facility_address
+        # store the name of the following locations in a variable
+        facility_name = facility[8]
+        # store the address in a variable
+        facility_address = facility[9]
+        # push these two variables to the user_facilities array
+        user_facilities << facility_name << facility_address
       end
     end
+  # if the user wants only handicap accessible locations
   else
     facilities["data"].each do |facility|
+      # check if the facility includes the desired borough and the accessibility option
       if facility[12].include?(borough) && facility[11].include?(accessibility)
+        # store the folllwing in variables
         facility_name = facility[8]
         facility_address = facility[9]
+        # push this to the array above
         user_facilities << facility_name << facility_address
       end
     end
   end
+  # return the updated array
   return user_facilities
 end
 
-# puts user_data_to_info(directory_data,"Brooklyn","Yes")
-
+# the run method that obtains the user input and prints the data
 def run(facilities)
+  # gets the user borough
   puts "What borough are you in?"
   user_borough = gets.chomp.capitalize
+  # gets if the user wants handicap accessible lcoations
   puts "Do you want handicap accessible locations?"
   user_handicap = gets.chomp.capitalize
   
+  # obtain the return value of the method (the array)
+  # replace the parameters with the user input
   user_info = user_data_to_info(facilities, user_borough, user_handicap)
+  # prints the name and address of the facility
   user_info.each do |name_and_address|
     puts name_and_address
   end
